@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ilaria e Francesco</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Navigazione principale">
+      <a href="#benvenuti">Benvenuti</a>
+      <a href="#dove-quando">Dove e quando</a>
+      <a href="#rsvp">Conferma la tua presenza</a>
+      <a href="#regalo">Le buste</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-title">
+      <p class="date">18 Settembre 2026</p>
+      <h1>Ilaria e Francesco</h1>
+      <p class="intro">
+        Abbiamo deciso di fare le cose in grande: parenti, amici, una promessa importante
+        e una discreta probabilità di commuoverci davanti a tutti.
+      </p>
+    </div>
+
+    <div class="hero-slider" aria-label="Album fotografico di Ilaria e Francesco">
+      <div class="hero-track" id="heroTrack">
+        <div class="hero-slide">
+          <div class="photo-placeholder">
+            <strong>Foto 1</strong>
+            Sostituisci questo blocco con una fotografia.
+          </div>
+        </div>
+        <div class="hero-slide">
+          <div class="photo-placeholder">
+            <strong>Foto 2</strong>
+            Aggiungi tutte le foto che vuoi duplicando una slide.
+          </div>
+        </div>
+        <div class="hero-slide">
+          <div class="photo-placeholder">
+            <strong>Foto 3</strong>
+            Lo slider scorre con le frecce laterali.
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow prev" type="button" aria-label="Foto precedente" onclick="moveHeroSlide(-1)">‹</button>
+      <button class="slider-arrow next" type="button" aria-label="Foto successiva" onclick="moveHeroSlide(1)">›</button>
+
+      <div class="slider-dots" id="heroDots" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <main>
+    <section id="benvenuti">
+      <h2>Benvenuti</h2>
+      <div class="centered">
+        <p>
+          Siamo felici di condividere con voi questo giorno. In questa pagina trovate tutte
+          le informazioni utili per partecipare al matrimonio.
+        </p>
+        <p>
+          Niente messaggi persi, screenshot o indicazioni recuperate all'ultimo minuto:
+          qui trovate tutto ciò che serve.
+        </p>
+      </div>
+    </section>
+
+    <section id="dove-quando">
+      <h2>Dove e quando</h2>
+      <div class="centered">
+        <p>
+          La cerimonia e il ricevimento si terranno entrambi nella stessa location.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <strong>Indirizzo</strong>
+          Via di Pietra Porzia, 40<br />
+          00044 Frascati RM
+        </div>
+
+        <div class="info-card">
+          <strong>Data e orario</strong>
+          [Inserire data]<br />
+          [Inserire orario]
+        </div>
+      </div>
+
+      <div class="centered">
+        <a class="button" href="https://www.google.com/maps/search/?api=1&query=Via%20di%20Pietra%20Porzia%2C%2040%2C%2000044%20Frascati%20RM" target="_blank" rel="noopener">
+          Apri su Google Maps
+        </a>
+      </div>
+    </section>
+
+    <section id="rsvp">
+      <h2>Conferma la tua presenza</h2>
+      <div class="centered">
+        <p>
+          Per confermare la vostra presenza vi basterà scrivere il vostro nome e cliccare su
+          “Cerca”. Una volta trovati, potrete indicarci se sarete presenti al matrimonio.
+        </p>
+        <p>
+          Se lo desiderate, potete anche lasciarci un messaggio: è facoltativo,
+          ma ci farà molto piacere leggerlo.
+        </p>
+      </div>
+
+      <div class="rsvp-box" style="text-align:center;">
+        <p>
+          La conferma della presenza viene gestita tramite Matrimonio.com.
+          Cliccate sul pulsante qui sotto per aprire la pagina dedicata e completare l'RSVP.
+        </p>
+
+        <a class="button" href="https://www.matrimonio.com/web/francesco-di-tommaso-and-ilaria/confermapresenza-3" target="_blank" rel="noopener">
+          Conferma la tua presenza
+        </a>
+      </div>
+    </section>
+
+    <section id="regalo">
+      <h2>Le buste</h2>
+      <div class="centered">
+        <p>
+          [Inserire qui la frase introduttiva per la sezione dedicata alle buste.]
+        </p>
+      </div>
+
+      <div class="bank-box">
+        <div class="bank-row">
+          <span class="bank-label">Intestatario</span>
+          [Inserire intestatario]
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">IBAN</span>
+          [Inserire IBAN]
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Conto corrente</span>
+          [Inserire numero conto]
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Causale</span>
+          Regalo matrimonio Ilaria e Francesco
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Ilaria e Francesco · [Data matrimonio]
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
