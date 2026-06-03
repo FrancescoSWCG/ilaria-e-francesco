@@ -23,7 +23,7 @@
   }
 
   function createGuestName(guest) {
-    return [guest.first_name, guest.last_name].filter(Boolean).join(" ");
+    return guest.first_name;
   }
 
   function createPreferenceOption(guest, value, label) {
@@ -63,11 +63,8 @@
 
     groups.forEach((group) => {
       const groupElement = document.createElement("div");
-      const title = document.createElement("h3");
 
       groupElement.className = "rsvp-group";
-      title.textContent = group.label;
-      groupElement.appendChild(title);
 
       group.guests.forEach((guest) => {
         const row = document.createElement("div");
@@ -150,6 +147,11 @@
 
     if (!data || data.length === 0) {
       setStatus("Non abbiamo trovato invitati con questi dati.", "error");
+      return;
+    }
+
+    if (!lastName && groupGuestsByGroup(data).size > 1) {
+      setStatus("Abbiamo trovato piu gruppi con questo nome. Inserisci anche il cognome.", "error");
       return;
     }
 
