@@ -99,6 +99,112 @@
       color: var(--grigio);
     }
 
+    .countdown {
+      max-width: 720px;
+      margin: 30px auto 0;
+      padding: 20px;
+      border: 1px solid rgba(23, 23, 23, 0.12);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .countdown-label {
+      margin: 0 0 14px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--nero);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .countdown-item {
+      min-width: 0;
+      padding: 14px 10px 12px;
+      border-radius: 14px;
+      background: var(--bianco);
+      color: var(--grigio);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.11em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .countdown-number {
+      position: relative;
+      display: block;
+      height: clamp(1.9rem, 4.75vw, 2.85rem);
+      margin-bottom: 5px;
+      overflow: hidden;
+      color: var(--nero);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 0.95;
+    }
+
+    .countdown-value {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .countdown-number:not(.is-animating) .countdown-value {
+      position: relative;
+    }
+
+    .countdown-old {
+      animation: countdown-old-down 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+
+    .countdown-new {
+      animation: countdown-new-from-top 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+
+    @keyframes countdown-old-down {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(115%);
+      }
+    }
+
+    @keyframes countdown-new-from-top {
+      from {
+        opacity: 0;
+        transform: translateY(-115%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .countdown-old,
+      .countdown-new {
+        animation: none;
+      }
+
+      .countdown-old {
+        display: none;
+      }
+    }
+
     .hero-slider {
       position: relative;
       width: min(1120px, calc(100% - 40px));
@@ -338,6 +444,14 @@
 
       .hero-slide {
         height: 52vh;
+      }
+
+      .countdown {
+        padding: 16px;
+      }
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .slider-arrow {
