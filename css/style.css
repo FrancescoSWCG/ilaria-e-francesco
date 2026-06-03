@@ -1,4 +1,12 @@
-:root {
+@font-face {
+      font-family: "hello-honey";
+      src: url("../assets/font/hello-honey.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
       --rosa-cipria: #d8b4b6;
       --rosa-chiaro: #f7eeee;
       --nero: #171717;
@@ -77,7 +85,7 @@
 
     h1 {
       margin: 0;
-      font-family: "Allura", cursive;
+      font-family: "hello-honey", cursive;
       font-size: clamp(5rem, 12vw, 9rem);
       line-height: 0.9;
       font-weight: 400;
@@ -215,10 +223,9 @@
 
     h2 {
       margin: 0 0 26px;
-      font-family: "Cormorant Garamond", serif;
+      font-family: "hello-honey", cursive;
       font-size: clamp(2.8rem, 7vw, 4.4rem);
-      font-style: italic;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1;
       color: var(--nero);
       text-align: center;
