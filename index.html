@@ -139,15 +139,35 @@
         </p>
       </div>
 
-      <div class="rsvp-box" style="text-align:center;">
-        <p>
-          La conferma della presenza viene gestita tramite Matrimonio.com.
-          Cliccate sul pulsante qui sotto per aprire la pagina dedicata e completare l'RSVP.
-        </p>
+      <div class="rsvp-box">
+        <form class="rsvp-search" id="rsvpSearchForm">
+          <div class="form-grid">
+            <label>
+              <span>Nome</span>
+              <input id="rsvpFirstName" name="firstName" type="text" autocomplete="given-name" required>
+            </label>
 
-        <a class="button" href="https://www.matrimonio.com/web/francesco-di-tommaso-and-ilaria/confermapresenza-3" target="_blank" rel="noopener">
-          Conferma la tua presenza
-        </a>
+            <label>
+              <span>Cognome</span>
+              <input id="rsvpLastName" name="lastName" type="text" autocomplete="family-name">
+            </label>
+          </div>
+
+          <button class="button" type="submit">Cerca</button>
+        </form>
+
+        <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></p>
+
+        <form class="rsvp-results" id="rsvpResultsForm" hidden>
+          <div id="rsvpResults"></div>
+
+          <label class="rsvp-notes">
+            <span>Note</span>
+            <textarea id="rsvpNotes" name="notes" rows="4"></textarea>
+          </label>
+
+          <button class="button" type="submit">Invia</button>
+        </form>
       </div>
     </section>
 
@@ -185,6 +205,9 @@
     Ilaria e Francesco · 18 Settembre 2026
   </footer>
   <script src="js/gallery-images.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/rsvp.js"></script>
 </body>
 </html>
