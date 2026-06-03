@@ -211,7 +211,6 @@
       margin: 0 auto 64px;
       border-radius: 28px;
       overflow: hidden;
-      background: var(--rosa-chiaro);
       box-shadow: 0 22px 60px rgba(23, 23, 23, 0.10);
     }
 
@@ -226,36 +225,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        linear-gradient(135deg, rgba(216, 180, 182, 0.72), rgba(255, 255, 255, 0.75)),
-        var(--rosa-chiaro);
+      background: transparent;
       color: var(--nero);
       text-align: center;
-      padding: 40px;
     }
 
     .hero-slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
-    }
-
-    .photo-placeholder {
-      max-width: 420px;
-      border: 1px dashed rgba(23, 23, 23, 0.45);
-      border-radius: 22px;
-      padding: 34px;
-      background: rgba(255, 255, 255, 0.38);
-    }
-
-    .photo-placeholder strong {
-      display: block;
-      margin-bottom: 8px;
-      font-family: "Cormorant Garamond", serif;
-      font-style: italic;
-      font-size: 2rem;
-      font-weight: 500;
     }
 
     .slider-arrow {
