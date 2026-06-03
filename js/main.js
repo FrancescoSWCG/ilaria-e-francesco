@@ -1,37 +1,82 @@
 let currentHeroSlide = 0;
-    const heroTrack = document.getElementById("heroTrack");
-    const heroSlides = document.querySelectorAll(".hero-slide");
-    const heroDotsContainer = document.getElementById("heroDots");
+const heroTrack = document.getElementById("heroTrack");
+const heroDotsContainer = document.getElementById("heroDots");
+const galleryImages = window.galleryImages || [];
 
-    heroSlides.forEach((_, index) => {
-      const dot = document.createElement("button");
-      dot.className = "slider-dot";
-      dot.type = "button";
-      dot.setAttribute("aria-label", "Vai alla foto " + (index + 1));
-      dot.addEventListener("click", () => goToHeroSlide(index));
-      heroDotsContainer.appendChild(dot);
-    });
+function createGalleryAlt(filename) {
+  return filename
+    .replace(/\.[^.]+$/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-    const heroDots = document.querySelectorAll(".slider-dot");
+function createImageSrc(filename) {
+  return "assets/images/" + encodeURIComponent(filename);
+}
 
-    function updateHeroSlider() {
-      heroTrack.style.transform = `translateX(-${currentHeroSlide * 100}%)`;
-      heroDots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentHeroSlide);
-      });
-    }
+function createHeroSlide(filename, index) {
+  const slide = document.createElement("div");
+  const image = document.createElement("img");
 
-    function moveHeroSlide(direction) {
-      currentHeroSlide = (currentHeroSlide + direction + heroSlides.length) % heroSlides.length;
-      updateHeroSlider();
-    }
+  slide.className = "hero-slide";
+  image.src = createImageSrc(filename);
+  image.alt = createGalleryAlt(filename) || "Foto di Ilaria e Francesco";
 
-    function goToHeroSlide(index) {
-      currentHeroSlide = index;
-      updateHeroSlider();
-    }
+  if (index === 0) {
+    image.fetchPriority = "high";
+  } else {
+    image.loading = "lazy";
+  }
 
-    updateHeroSlider();
+  slide.appendChild(image);
+  return slide;
+}
+
+function createHeroDot(index) {
+  const dot = document.createElement("button");
+
+  dot.className = "slider-dot";
+  dot.type = "button";
+  dot.setAttribute("aria-label", "Vai alla foto " + (index + 1));
+  dot.addEventListener("click", () => goToHeroSlide(index));
+
+  return dot;
+}
+
+function renderHeroSlider() {
+  galleryImages.forEach((filename, index) => {
+    heroTrack.appendChild(createHeroSlide(filename, index));
+    heroDotsContainer.appendChild(createHeroDot(index));
+  });
+
+  updateHeroSlider();
+}
+
+function updateHeroSlider() {
+  const heroDots = document.querySelectorAll(".slider-dot");
+
+  heroTrack.style.transform = `translateX(-${currentHeroSlide * 100}%)`;
+  heroDots.forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentHeroSlide);
+  });
+}
+
+function moveHeroSlide(direction) {
+  if (galleryImages.length === 0) {
+    return;
+  }
+
+  currentHeroSlide = (currentHeroSlide + direction + galleryImages.length) % galleryImages.length;
+  updateHeroSlider();
+}
+
+function goToHeroSlide(index) {
+  currentHeroSlide = index;
+  updateHeroSlider();
+}
+
+renderHeroSlider();
 
     const weddingDate = new Date("2026-09-18T11:30:00+02:00");
     const countdownUnits = {
