@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$imagesPath = Join-Path $projectRoot "assets/images"
+$imagesPath = Join-Path $projectRoot "assets/images/photo"
 $galleryPath = Join-Path $projectRoot "js/gallery-images.js"
 $extensions = @(".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif")
 

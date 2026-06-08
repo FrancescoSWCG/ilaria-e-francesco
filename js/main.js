@@ -12,7 +12,7 @@ function createGalleryAlt(filename) {
 }
 
 function createImageSrc(filename) {
-  return "assets/images/" + encodeURIComponent(filename);
+  return "assets/images/photo/" + encodeURIComponent(filename);
 }
 
 function createHeroSlide(filename, index) {

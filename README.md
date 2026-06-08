@@ -34,13 +34,11 @@ wedding-site-github-pages/
 Inserisci le immagini nella cartella:
 
 ```text
-assets/images/
+assets/images/photo/
 ```
 
-Poi, in `index.html`, sostituisci i blocchi placeholder dello slider con tag immagine, ad esempio:
+Poi esegui lo script per aggiornare la lista immagini usata dallo slider:
 
-```html
-<div class="hero-slide">
-  <img src="assets/images/foto-1.jpg" alt="Ilaria e Francesco">
-</div>
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\update-gallery.ps1
 ```

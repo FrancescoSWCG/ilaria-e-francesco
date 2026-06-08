@@ -1,7 +1,7 @@
 @font-face {
       font-family: "hello-honey";
-      src: url("../assets/font/hello-honey.otf") format("opentype");
-      font-weight: 400;
+      src: url("../assets/font/anime.otf") format("opentype");
+      font-weight: 200;
       font-style: normal;
       font-display: swap;
     }
@@ -76,7 +76,7 @@
     }
 
     .hero-title .date {
-      margin: 0 0 8px;
+      margin: 0 0 22px;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.22em;
@@ -84,17 +84,17 @@
     }
 
     h1 {
-      margin: 0;
+      margin: 56px 0 76px;
       font-family: "hello-honey", cursive;
-      font-size: clamp(5rem, 12vw, 9rem);
-      line-height: 0.9;
+      font-size: clamp(3.75rem, 9vw, 6.75rem);
+      line-height: 1.12;
       font-weight: 400;
       color: var(--nero);
     }
 
     .hero-title .intro {
       max-width: 720px;
-      margin: 28px auto 0;
+      margin: 0 auto;
       font-size: 1rem;
       color: var(--grigio);
     }
@@ -297,7 +297,7 @@
     }
 
     section {
-      padding: 72px 0;
+      padding: 40px 0 72px;
       border-bottom: 1px solid rgba(216, 180, 182, 0.55);
       scroll-margin-top: 88px;
     }
@@ -307,9 +307,9 @@
     }
 
     h2 {
-      margin: 0 0 26px;
+      margin: 0 0 54px;
       font-family: "hello-honey", cursive;
-      font-size: clamp(2.8rem, 7vw, 4.4rem);
+      font-size: clamp(2.1rem, 5.25vw, 3.3rem);
       font-weight: 400;
       line-height: 1;
       color: var(--nero);
@@ -622,7 +622,7 @@
       }
 
       section {
-        padding: 56px 0;
+        padding: 40px 0 56px;
       }
     }
 
@@ -633,4 +633,15 @@
       .wedshoot-steps li {
       margin-bottom: 1.5rem;
       line-height: 1.6;
+      }
+
+      .wedshoot-qr {
+      margin: 18px 0 14px;
+      text-align: center;
+      }
+
+      .wedshoot-qr img {
+      display: inline-block;
+      width: min(150px, 100%);
+      height: auto;
       }
