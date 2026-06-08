@@ -56,22 +56,50 @@ language plpgsql
 security definer
 set search_path = public
 as $$
+declare
+  updated_count integer;
+  submission_count integer;
 begin
   if p_responses is null or jsonb_typeof(p_responses) <> 'array' then
     raise exception 'p_responses must be a JSON array';
   end if;
 
-  update guests g
-  set
-    rsvp = response.rsvp,
-    dietary_notes = nullif(trim(coalesce(p_notes, '')), ''),
-    updated_at = now()
-  from jsonb_to_recordset(p_responses) as response(
-    guest_id uuid,
-    rsvp public.rsvp_status
+  with response_data as (
+    select *
+    from jsonb_to_recordset(p_responses) as response(
+      guest_id uuid,
+      rsvp public.rsvp_status
+    )
+    where response.rsvp in ('yes'::public.rsvp_status, 'no'::public.rsvp_status)
+  ),
+  updated_guests as (
+    update guests g
+    set
+      rsvp = response.rsvp,
+      dietary_notes = nullif(trim(coalesce(p_notes, '')), ''),
+      updated_at = now()
+    from response_data response
+    where g.id = response.guest_id
+    returning g.group_id
+  ),
+  inserted_submissions as (
+    insert into rsvp_submissions (group_id)
+    select distinct group_id
+    from updated_guests
+    returning 1
   )
-  where g.id = response.guest_id
-    and response.rsvp in ('yes'::public.rsvp_status, 'no'::public.rsvp_status);
+  select
+    (select count(*) from updated_guests),
+    (select count(*) from inserted_submissions)
+  into updated_count, submission_count;
+
+  if updated_count = 0 then
+    raise exception 'No RSVP guests updated';
+  end if;
+
+  if submission_count = 0 then
+    raise exception 'No RSVP submission inserted';
+  end if;
 end;
 $$;
 
@@ -80,3 +108,5 @@ revoke all on function public.submit_rsvp_preferences(jsonb, text) from public;
 
 grant execute on function public.search_rsvp_guests(text, text) to anon;
 grant execute on function public.submit_rsvp_preferences(jsonb, text) to anon;
+
+notify pgrst, 'reload schema';

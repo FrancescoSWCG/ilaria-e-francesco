@@ -457,6 +457,7 @@
     .rsvp-box .rsvp-search-button {
       border-color: transparent;
       background: var(--bianco);
+      font-family: "Montserrat", sans-serif;
       font-weight: 700;
       min-width: 148px;
       box-shadow: 0 10px 24px rgba(23, 23, 23, 0.12);

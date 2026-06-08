@@ -173,29 +173,16 @@
     setLoading(true);
     setStatus("Salvo la conferma...", "");
 
-    const currentGroupId = currentGuests.length > 0 ? currentGuests[0].group_id : null;
-
     const { error } = await db.rpc("submit_rsvp_preferences", {
       p_responses: responses,
       p_notes: normalizeValue(notesElement.value),
     });
 
     if (error) {
+      console.error("Errore salvataggio RSVP:", error);
       setLoading(false);
-      setStatus("Non riesco a salvare la conferma. Riprova tra poco.", "error");
+      setStatus("Non riesco a salvare la conferma: " + error.message, "error");
       return;
-    }
-
-    if (currentGroupId) {
-      const { error: submissionError } = await db
-        .from("rsvp_submissions")
-        .insert({
-          group_id: currentGroupId,
-        });
-
-      if (submissionError) {
-        console.error("Errore creazione RSVP submission:", submissionError);
-      }
     }
 
     setLoading(false);
