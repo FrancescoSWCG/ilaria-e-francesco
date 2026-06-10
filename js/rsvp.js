@@ -92,23 +92,20 @@
   }
 
   function readResponses() {
-    const missingGuests = [];
-    const responses = currentGuests.map((guest) => {
-      const selected = resultsForm.querySelector(
-        `input[name="guest-${guest.guest_id}"]:checked`
-      );
+    const responses = currentGuests
+      .map((guest) => {
+        const selected = resultsForm.querySelector(
+          `input[name="guest-${guest.guest_id}"]:checked`
+        );
 
-      if (!selected) {
-        missingGuests.push(createGuestName(guest));
-      }
+        return {
+          guest_id: guest.guest_id,
+          rsvp: selected ? selected.value : null,
+        };
+      })
+      .filter((response) => response.rsvp !== null);
 
-      return {
-        guest_id: guest.guest_id,
-        rsvp: selected ? selected.value : null,
-      };
-    });
-
-    return { responses, missingGuests };
+    return responses;
   }
 
   async function searchGuests(event) {
@@ -163,10 +160,10 @@
   async function submitResponses(event) {
     event.preventDefault();
 
-    const { responses, missingGuests } = readResponses();
+    const responses = readResponses();
 
-    if (missingGuests.length > 0) {
-      setStatus("Indica Presente o Assente per tutti gli invitati mostrati.", "error");
+    if (responses.length === 0) {
+      setStatus("Seleziona almeno una preferenza prima di inviare.", "error");
       return;
     }
 
@@ -191,7 +188,7 @@
       const response = responses.find((item) => item.guest_id === guest.guest_id);
       return {
         ...guest,
-        rsvp: response.rsvp,
+        rsvp: response ? response.rsvp : guest.rsvp,
         dietary_notes: normalizeValue(notesElement.value),
       };
     });
