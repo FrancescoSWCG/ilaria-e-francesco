@@ -108,6 +108,27 @@
     return responses;
   }
 
+  function buildConfirmationMessage(responses) {
+    const presentCount = responses.filter((r) => r.rsvp === "yes").length;
+    const absentCount = responses.filter((r) => r.rsvp === "no").length;
+    const notes = normalizeValue(notesElement.value);
+
+    let message = "Confermi la tua scelta?\n\n";
+    
+    if (presentCount > 0) {
+      message += `Presenti: ${presentCount}\n`;
+    }
+    if (absentCount > 0) {
+      message += `Assenti: ${absentCount}\n`;
+    }
+    
+    if (notes) {
+      message += `Note: ${notes}\n`;
+    }
+
+    return message;
+  }
+
   async function searchGuests(event) {
     event.preventDefault();
 
@@ -164,6 +185,12 @@
 
     if (responses.length === 0) {
       setStatus("Seleziona almeno una preferenza prima di inviare.", "error");
+      return;
+    }
+
+    // Mostra popup di conferma
+    const confirmationMessage = buildConfirmationMessage(responses);
+    if (!confirm(confirmationMessage)) {
       return;
     }
 
