@@ -563,6 +563,147 @@
       color: var(--grigio);
     }
 
+    /* Modal styles */
+    .rsvp-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .rsvp-modal[hidden] {
+      display: none;
+    }
+
+    .rsvp-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(23, 23, 23, 0.5);
+      animation: modal-fade-in 0.3s ease;
+    }
+
+    .rsvp-modal-content {
+      position: relative;
+      background: var(--bianco);
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(23, 23, 23, 0.15);
+      max-width: 520px;
+      width: 100%;
+      animation: modal-slide-up 0.3s ease;
+      overflow: hidden;
+    }
+
+    @keyframes modal-fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modal-slide-up {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .rsvp-modal-header {
+      padding: 28px 30px 20px;
+      border-bottom: 1px solid rgba(216, 180, 182, 0.35);
+    }
+
+    .rsvp-modal-header h3 {
+      margin: 0;
+      font-family: "hello-honey", cursive;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--nero);
+    }
+
+    .rsvp-modal-body {
+      padding: 28px 30px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--grigio);
+    }
+
+    .rsvp-modal-body-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(23, 23, 23, 0.08);
+    }
+
+    .rsvp-modal-body-item:last-child {
+      border-bottom: none;
+    }
+
+    .rsvp-modal-body-label {
+      color: var(--nero);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .rsvp-modal-body-value {
+      color: var(--nero);
+      font-weight: 500;
+    }
+
+    .rsvp-modal-footer {
+      padding: 20px 30px 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      border-top: 1px solid rgba(216, 180, 182, 0.35);
+    }
+
+    .rsvp-modal-cancel,
+    .rsvp-modal-confirm {
+      flex: 1;
+      margin-top: 0 !important;
+      font-weight: 600;
+    }
+
+    .rsvp-modal-cancel {
+      border-color: rgba(23, 23, 23, 0.3);
+      background: var(--rosa-chiaro);
+      color: var(--nero);
+    }
+
+    .rsvp-modal-cancel:hover {
+      background: rgba(216, 180, 182, 0.5);
+      color: var(--nero);
+    }
+
+    .rsvp-modal-confirm {
+      background: var(--nero);
+      color: var(--bianco);
+      border-color: var(--nero);
+    }
+
+    .rsvp-modal-confirm:hover {
+      background: rgba(23, 23, 23, 0.85);
+      color: var(--bianco);
+    }
+
     footer {
       padding: 44px 24px 58px;
       text-align: center;
@@ -625,24 +766,50 @@
       section {
         padding: 40px 0 56px;
       }
+
+      .rsvp-modal-content {
+        max-width: calc(100% - 40px);
+      }
+
+      .rsvp-modal-header {
+        padding: 24px 24px 16px;
+      }
+
+      .rsvp-modal-header h3 {
+        font-size: 1.5rem;
+      }
+
+      .rsvp-modal-body {
+        padding: 24px;
+      }
+
+      .rsvp-modal-footer {
+        padding: 16px 24px 24px;
+        flex-direction: column;
+      }
+
+      .rsvp-modal-cancel,
+      .rsvp-modal-confirm {
+        width: 100%;
+      }
     }
 
-      .wedshoot-steps {
+    .wedshoot-steps {
       padding-left: 1.5rem;
-      }
-      
-      .wedshoot-steps li {
+    }
+    
+    .wedshoot-steps li {
       margin-bottom: 1.5rem;
       line-height: 1.6;
-      }
+    }
 
-      .wedshoot-qr {
+    .wedshoot-qr {
       margin: 18px 0 14px;
       text-align: center;
-      }
+    }
 
-      .wedshoot-qr img {
+    .wedshoot-qr img {
       display: inline-block;
       width: min(150px, 100%);
       height: auto;
-      }
+    }

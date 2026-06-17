@@ -132,7 +132,7 @@
       <div class="centered">
         <p>
           Per confermare la vostra presenza vi basterà scrivere il vostro nome e cliccare su
-          “Cerca”. Una volta trovati, potrete indicarci se sarete presenti al matrimonio.
+          "Cerca". Una volta trovati, potrete indicarci se sarete presenti al matrimonio.
         </p>
         <p>
           Se hai allergie, intolleranze o particolari esigenze alimentari, ti chiediamo di segnalarcele. 
@@ -244,6 +244,21 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal per conferma RSVP -->
+  <div class="rsvp-modal" id="rsvpModal" role="dialog" aria-labelledby="rsvpModalTitle" hidden>
+    <div class="rsvp-modal-backdrop" id="rsvpModalBackdrop"></div>
+    <div class="rsvp-modal-content">
+      <div class="rsvp-modal-header">
+        <h3 id="rsvpModalTitle">Conferma la tua scelta</h3>
+      </div>
+      <div class="rsvp-modal-body" id="rsvpModalBody"></div>
+      <div class="rsvp-modal-footer">
+        <button class="button rsvp-modal-cancel" type="button" id="rsvpModalCancel">Annulla</button>
+        <button class="button rsvp-modal-confirm" type="button" id="rsvpModalConfirm">Conferma</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     Ilaria e Francesco · 18 Settembre 2026

@@ -5,8 +5,16 @@
   const resultsContainer = document.getElementById("rsvpResults");
   const statusElement = document.getElementById("rsvpStatus");
   const notesElement = document.getElementById("rsvpNotes");
+  
+  // Modal elements
+  const rsvpModal = document.getElementById("rsvpModal");
+  const rsvpModalBackdrop = document.getElementById("rsvpModalBackdrop");
+  const rsvpModalBody = document.getElementById("rsvpModalBody");
+  const rsvpModalCancel = document.getElementById("rsvpModalCancel");
+  const rsvpModalConfirm = document.getElementById("rsvpModalConfirm");
 
   let currentGuests = [];
+  let pendingResponses = null;
 
   function setStatus(message, type) {
     statusElement.textContent = message;
@@ -108,25 +116,55 @@
     return responses;
   }
 
-  function buildConfirmationMessage(responses) {
+  function openConfirmationModal(responses) {
     const presentCount = responses.filter((r) => r.rsvp === "yes").length;
     const absentCount = responses.filter((r) => r.rsvp === "no").length;
     const notes = normalizeValue(notesElement.value);
 
-    let message = "Confermi la tua scelta?\n\n";
-    
+    // Costruisci il contenuto del modal
+    let modalContent = "";
+
     if (presentCount > 0) {
-      message += `Presenti: ${presentCount}\n`;
-    }
-    if (absentCount > 0) {
-      message += `Assenti: ${absentCount}\n`;
-    }
-    
-    if (notes) {
-      message += `Note: ${notes}\n`;
+      modalContent += `
+        <div class="rsvp-modal-body-item">
+          <span class="rsvp-modal-body-label">Persone presenti:</span>
+          <span class="rsvp-modal-body-value">${presentCount}</span>
+        </div>
+      `;
     }
 
-    return message;
+    if (absentCount > 0) {
+      modalContent += `
+        <div class="rsvp-modal-body-item">
+          <span class="rsvp-modal-body-label">Persone assenti:</span>
+          <span class="rsvp-modal-body-value">${absentCount}</span>
+        </div>
+      `;
+    }
+
+    if (notes) {
+      modalContent += `
+        <div class="rsvp-modal-body-item">
+          <span class="rsvp-modal-body-label">Note:</span>
+        </div>
+        <div style="padding: 12px 0; color: var(--grigio);">
+          ${notes}
+        </div>
+      `;
+    }
+
+    rsvpModalBody.innerHTML = modalContent;
+
+    // Salva le risposte in pending
+    pendingResponses = responses;
+
+    // Mostra il modal
+    rsvpModal.hidden = false;
+  }
+
+  function closeConfirmationModal() {
+    rsvpModal.hidden = true;
+    pendingResponses = null;
   }
 
   async function searchGuests(event) {
@@ -188,11 +226,17 @@
       return;
     }
 
-    // Mostra popup di conferma
-    const confirmationMessage = buildConfirmationMessage(responses);
-    if (!confirm(confirmationMessage)) {
+    // Apri il modal di conferma
+    openConfirmationModal(responses);
+  }
+
+  async function confirmSubmit() {
+    if (!pendingResponses) {
       return;
     }
+
+    const responses = pendingResponses;
+    closeConfirmationModal();
 
     setLoading(true);
     setStatus("Salvo la conferma...", "");
@@ -226,4 +270,16 @@
 
   searchForm.addEventListener("submit", searchGuests);
   resultsForm.addEventListener("submit", submitResponses);
+  
+  // Event listeners per il modal
+  rsvpModalCancel.addEventListener("click", closeConfirmationModal);
+  rsvpModalBackdrop.addEventListener("click", closeConfirmationModal);
+  rsvpModalConfirm.addEventListener("click", confirmSubmit);
+
+  // Chiudi il modal quando premi Escape
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !rsvpModal.hidden) {
+      closeConfirmationModal();
+    }
+  });
 })();
