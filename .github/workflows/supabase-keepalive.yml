@@ -1,0 +1,37 @@
+name: Supabase keepalive
+
+on:
+  schedule:
+    - cron: "17 8,14,20 * * *"
+      timezone: "Europe/Rome"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping-supabase:
+    name: Ping Supabase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Supabase keepalive function
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          set -euo pipefail
+
+          curl \
+            --silent \
+            --show-error \
+            --fail-with-body \
+            --request POST \
+            "${SUPABASE_URL}/rest/v1/rpc/ping_project" \
+            --header "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+            --header "Content-Type: application/json" \
+            --data '{}'
+
+          echo
+          echo "Supabase keepalive completed successfully."
