@@ -85,6 +85,8 @@ renderHeroSlider();
       minutes: document.getElementById("countdownMinutes"),
       seconds: document.getElementById("countdownSeconds"),
     };
+    const countdown = document.querySelector(".countdown");
+    let countdownInterval;
 
     function createCountdownValue(value, className) {
       const valueElement = document.createElement("span");
@@ -134,7 +136,8 @@ renderHeroSlider();
     }
 
     function updateCountdown() {
-      const distance = Math.max(weddingDate.getTime() - Date.now(), 0);
+      const remainingTime = weddingDate.getTime() - Date.now();
+      const distance = Math.max(remainingTime, 0);
       const days = Math.floor(distance / 86400000);
       const hours = Math.floor((distance % 86400000) / 3600000);
       const minutes = Math.floor((distance % 3600000) / 60000);
@@ -144,7 +147,16 @@ renderHeroSlider();
       setCountdownValue(countdownUnits.hours, String(hours).padStart(2, "0"));
       setCountdownValue(countdownUnits.minutes, String(minutes).padStart(2, "0"));
       setCountdownValue(countdownUnits.seconds, String(seconds).padStart(2, "0"));
+
+      if (remainingTime <= 0) {
+        countdown.classList.add("is-complete");
+        clearInterval(countdownInterval);
+        return true;
+      }
+
+      return false;
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    if (!updateCountdown()) {
+      countdownInterval = setInterval(updateCountdown, 1000);
+    }

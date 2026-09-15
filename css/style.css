@@ -122,6 +122,31 @@
       gap: 12px;
     }
 
+    .countdown-complete {
+      display: none;
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.25rem, 8vw, 4.25rem);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--nero);
+    }
+
+    .countdown.is-complete {
+      padding: 32px 20px;
+    }
+
+    .countdown.is-complete .countdown-label,
+    .countdown.is-complete .countdown-grid {
+      display: none;
+    }
+
+    .countdown.is-complete .countdown-complete {
+      display: block;
+      animation: countdown-complete-in 0.58s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
     .countdown-item {
       min-width: 0;
       padding: 14px 10px 12px;
@@ -194,9 +219,22 @@
       }
     }
 
+    @keyframes countdown-complete-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .countdown-old,
-      .countdown-new {
+      .countdown-new,
+      .countdown.is-complete .countdown-complete {
         animation: none;
       }
 
