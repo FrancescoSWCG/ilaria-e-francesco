@@ -78,7 +78,7 @@ function goToHeroSlide(index) {
 
 renderHeroSlider();
 
-    const weddingDate = new Date("2026-09-18T11:30:00+02:00");
+    const weddingDate = new Date("2026-09-15T18:57:48+02:00");
     const countdownUnits = {
       days: document.getElementById("countdownDays"),
       hours: document.getElementById("countdownHours"),
